@@ -7,17 +7,34 @@ const Shades25 = () => {
   const [rgbaValue, setRgbaValue] = useState({red: 0, green: 0, blue: 0, alpha: 1})
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
-  const [hsvaText, setHsvaText] = useState('');
-  const [rgbaText, setRgbaText] = useState('');
+  const [shades, setShades] = useState([]);
 
   useEffect(() => {
-    // Combine H, S, V, A into a single text-field for HSV
     const newHsvaText = `hsva(${hsvaValue.hue}, ${hsvaValue.saturation}%, ${hsvaValue.value}%, ${hsvaValue.alpha})`;
-    setHsvaText(newHsvaText);
 
-    // Combine R, G, B, A into a single text-field for RGBA
     const newRgbaText = `rgba(${rgbaValue.red}, ${rgbaValue.green}, ${rgbaValue.blue}, ${rgbaValue.alpha})`;
-    setRgbaText(newRgbaText);
+    
+    const shadesToBlack = Array.from({length:12}, (_, i)=>{
+      const newRed = Math.round(((rgbaValue.red) / 12) * i);
+      const newGreen = Math.round(((rgbaValue.green) / 12) * i);
+      const newBlue = Math.round(((rgbaValue.blue) / 12) * i);
+
+      return `rgba(${newRed}, ${newGreen}, ${newBlue}, ${rgbaValue.alpha})`;
+    });
+
+    
+    const shadesToWhite = Array.from({ length: 12 }, (_, i) => {
+      const newRed = Math.round(255 - ((255 - rgbaValue.red) / 12) * i);
+      const newGreen = Math.round(255 - ((255 - rgbaValue.green) / 12) * i);
+      const newBlue = Math.round(255 - ((255 - rgbaValue.blue) / 12) * i);
+
+      return `rgba(${newRed}, ${newGreen}, ${newBlue}, ${rgbaValue.alpha})`;
+    });
+
+    // Combine the two arrays to get the final array with the selected color in the middle
+    const newShades = [...shadesToBlack, newRgbaText, ...shadesToWhite.reverse()];
+    setShades(newShades);
+
   }, [hsvaValue, rgbaValue]);
 
 
@@ -39,7 +56,35 @@ const Shades25 = () => {
 
   return (
     <div>
-      <div className="color-division" style={{ backgroundColor: 'hsla(180, 50%, 50%, 1)' }} onClick={openModal}>
+      <div style={{ width: '100%', margin: '0 auto' }}>
+        <div
+          style={{
+            borderRadius: '7px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+            {shades.map((shade, index) => (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: shade,
+                  width: '20%',
+                  height: '15vh',
+                  textAlign: 'center',
+                }}
+              ></div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div
+        className="color-division"
+        style={{ backgroundColor: 'hsla(180, 50%, 50%, 1)' }}
+        onClick={openModal}
+      >
         Select Color
       </div>
       <Modal
@@ -59,15 +104,11 @@ const Shades25 = () => {
           },
         }}
       >
-        {/* Render the Picker inside the modal */}
         <Picker setHsvaValue={setHsvaValue} setRgbaValue={setRgbaValue} />
       </Modal>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut urna sed lectus cursus accumsan a in odio. Integer vel leo sit amet arcu hendrerit iaculis. Duis efficitur tincidunt nulla id convallis. Etiam vel justo a mauris imperdiet posuere. Suspendisse vitae metus ac justo efficitur scelerisque. Morbi vel velit vitae nisl tincidunt tristique. Sed fermentum justo vitae orci malesuada, vel tincidunt est scelerisque. Nulla facilisi. Aliquam non justo a erat eleifend suscipit. Suspendisse potenti. Proin vel tristique metus. In hac habitasse platea dictumst. Vivamus gravida tortor eu lacus tempus, id facilisis nisi auctor. Quisque cursus nulla vel elit elementum, a cursus metus posuere. Curabitur luctus malesuada augue, ac efficitur metus eleifend in.
-    <br/>
-    {hsvaText}
-    {rgbaText}
     </div>
+    
   );
-};
+}  
 
 export default Shades25;

@@ -17,7 +17,7 @@ const RGBAPicker = ({ onRgbaChange }) => {
 
   useEffect(() => {
     onRgbaChange({ red, green, blue, alpha });
-  });
+  }, [red, green, blue, alpha]);  
 
   return (
     <div style={{ border: 'none', padding: '10px', borderRadius: '5px', width: '222px' }}>

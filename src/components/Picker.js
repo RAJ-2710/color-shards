@@ -4,7 +4,7 @@ import HSVApicker from './HSVApicker'; // Import the HSVApicker component
 import './Picker.css';
 
 const Picker = ({ setHsvaValue, setRgbaValue }) => {
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(0);
 
   const handleOptionClick = (index) => {
     setSelectedOption(index);

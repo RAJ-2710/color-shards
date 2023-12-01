@@ -10,7 +10,7 @@ const HSVApicker = ({ onHsvaChange }) => {
 
   useEffect(() => {
     onHsvaChange({ hue, saturation, value, alpha });
-  }, [hue, saturation, value, alpha, onHsvaChange]);
+  });
 
   const handleHueChange = (event) => setHue(event.target.value);
   const handleSaturationChange = (event) => setSaturation(event.target.value);

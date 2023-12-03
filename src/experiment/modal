@@ -1,0 +1,18 @@
+// const [modalIsOpen, setModalIsOpen] = useState(false);
+// const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 }); 
+ 
+//  const openModal = (event) => {
+//     setModalIsOpen(true);
+  
+//     const maxTop = window.innerHeight - 248; // 248 is the modal height
+//     const maxLeft = window.innerWidth - 260; // 244 is the modal width
+  
+//     const top = Math.min(event.clientY, maxTop);
+//     const left = Math.min(event.clientX, maxLeft);
+  
+//     setModalPosition({ top, left });
+//   };
+  
+//   const closeModal = () => {
+//     setModalIsOpen(false);
+//   };

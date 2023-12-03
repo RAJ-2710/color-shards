@@ -1,36 +1,6 @@
-/* Picker.css
-
-.additional-division {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    width: 244px;
-  }
-  
-  .additional-option {
-    flex: 1;
-    text-align: center;
-    /* color: black; */
-    /* cursor: pointer;
-  }
-  
-  .picker-container {
-    width: 244px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .picker-option {
-    flex: 1;
-    text-align: 'center';
-    color: 'black';
-    cursor: 'pointer';
-    position: relative;
-  } */
-/* Picker.css */
-
 .color-picker-container {
     /* border: 1px solid; */
+    background: white;
     border-radius: 10px;
     padding-top: 10px;
     display: flex;

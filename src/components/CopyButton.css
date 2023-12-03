@@ -1,0 +1,20 @@
+.copy-button {
+    background: white;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+  
+  .copy-button:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .copy-button span {
+    color: black;
+    margin-left: 8px;
+  }
+  

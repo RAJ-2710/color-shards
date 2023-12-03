@@ -4,13 +4,10 @@ body {
 }
 
   .text-behind-cards {
-    position: absolute;
-    top: 54%;
+    position: fixed;
+    top: 55%;
     left: 35%;
     transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: white;
     font-size: x-large;
     font-family: 'Poppins', sans-serif;
@@ -21,16 +18,23 @@ body {
     background: rgba(0, 54, 64, 1);
     margin: 0;
     height: 100vh;
-    padding: 3%;
+    padding: 2%;
 }
 
-.flex-container{
+ .flex-container{
     display: flex;
+}
+
+.left-container {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .left-container-cards {
     flex: 3;
-    margin-top: 5%;
+  transition: 0.5s;
 }
 
 .left-container-stripes {
@@ -38,11 +42,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: rotateX(180deg);
+}
+
+.flip {
+  transform: rotateX(180deg);
+  transition: 0.5s;
 }
 
 .right-container{
     flex: 1;
-    padding: 5%
+    padding: 2%
 }
 
 .shades-container-cards {
@@ -107,17 +117,54 @@ body {
   }
 }
 
-.select-color{
-    width: 10%;
-}
-
 .text{
     color: white;
     font-size: x-large;
     font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .text span{
     font-weight: bold;
     font-size: large;
+}
+
+.text span:hover{
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.2);
+  padding: 5px;
+}
+
+.text.small {
+  font-size: 70%;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.copy-info {
+  color: white;
+  font-size: small;
+  font-style: italic;
+  font-family: 'Poppins', sans-serif;
+}
+
+.compare-box {
+  width: 70%;
+  height: 50px;
+  display: inline-flex;
+  padding: 2px;
+  background: white;
+  /* border-radius: 4px; */
+  /* margin-top: 4%; */
+}
+
+.hovered-color {
+  border-radius: 4px 0 0 4px;
+  width: 50%;
+}
+
+.selected-color {
+  border-radius: 0 4px 4px 0;
+  width: 50%;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Picker from '../components/Picker';
 import './Shades25.css'
-import CopyButton from '../components/CopyButton';
+// import CopyButton from '../components/CopyButton';
 import ToggleButton from '../components/ToggleButton';
 
 const Shades25 = () => {
@@ -11,6 +11,7 @@ const Shades25 = () => {
   const [selectedShade, setSelectedShade] = useState('Click on a shade to see the color');
   const [shades, setShades] = useState([]);
   const [isToggled, setIsToggled] = useState(false);
+  const [isSmall, setIsSmall] = useState(false);
 
   useEffect(() => {
     const newHsvaText = `hsva(${hsvaValue.hue}, ${hsvaValue.saturation}%, ${hsvaValue.value}%, ${hsvaValue.alpha})`;
@@ -47,15 +48,38 @@ const Shades25 = () => {
     setIsToggled(value);
   };
 
+  const handleClick = () => {
+    setIsSmall(true);
+    
+    // Update textToCopy before attempting to copy
+    const textToCopyUpdated = selectedShade;
+  
+    if (textToCopyUpdated !== "Click on a shade to see the color") {
+      navigator.clipboard.writeText(textToCopyUpdated);
+    }
+    else
+    {
+      navigator.clipboard.writeText("'you forgot to slect the color !!'");
+    }
+  
+    // Simulate a delay before growing back to normal size
+    setTimeout(() => {
+      setIsSmall(false);
+    }, 100); // Adjust the delay as needed
+  };
+
   return (
     <div className={'main-container'}>
-      <div className={'flex-container'}>
-        <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
-          <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'} style={!isToggled ? {background: shades[13]} : {background: hoveredShade}}>
-            {rgbaValue.alpha < 0.5 && (
+      <div className='flex-container'>
+      {rgbaValue.alpha < 0.5 && (
               <div className={'text-behind-cards'}>
                 Sometimes, remaining Invisible is all you need, right ?
               </div>)}
+      <div className={`left-container ${isToggled ? 'flip' : ''}`}>
+        
+        <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
+          <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'} style={!isToggled ? {background: shades[13]} : {background: hoveredShade}}>
+            
               {shades.map((shade, index) => (
                 <div
                   key={index}
@@ -66,6 +90,7 @@ const Shades25 = () => {
                   onMouseDown={() => handleCardDown(shade)}/>
               ))}
           </div>
+        </div>
         </div>
         <div className={'right-container'}>
           <div>
@@ -79,20 +104,32 @@ const Shades25 = () => {
             <div>
               <Picker setHsvaValue={setHsvaValue} setRgbaValue={setRgbaValue} />
             </div> <br/>
-            <div className={'text'}>
-              Current Shade: <br/>
-              <span>
-                {hoveredShade}
-              </span>
-            </div> <br/>
-            <div className={'text'}>
-              Selected Shade: <br/>
-              <CopyButton textToCopy={selectedShade} />
-              <span className='space span'></span>
-              <span>
-                {selectedShade}
-              </span>
+            <div>
+              <div className={'text'}>
+                Current Shade: <br/>
+                <span>
+                  {hoveredShade}
+                </span>
+              </div>
+              <br />
+              <div className={'text'}>
+                Selected Shade: <br />
+                <div className='copy-info'>
+                  Click below to copy the color
+                </div>
+                <span
+                  className={`space span ${isSmall ? 'text small' : ''}`}
+                  onClick={handleClick} >
+                  {selectedShade}
+                </span>
+              </div>
             </div>
+            <br/>
+            <div className='compare-box'>
+              <div className='hovered-color' style={{ background: hoveredShade === 'Hover over a shade to see the color' ? 'white' : hoveredShade }}></div>
+              <div className='selected-color' style={{background: selectedShade}}></div>
+            </div>
+            
           </div>
         </div>
       </div>

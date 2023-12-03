@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 
 const RGBAPicker = ({ onRgbaChange }) => {
-  const [red, setRed] = useState(255);
+  const [red, setRed] = useState(135);
   const [green, setGreen] = useState(0);
-  const [blue, setBlue] = useState(0);
+  const [blue, setBlue] = useState(45);
   const [alpha, setAlpha] = useState(1);
 
   const handleRedChange = (event) => setRed(event.target.value);

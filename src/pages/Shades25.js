@@ -50,55 +50,53 @@ const Shades25 = () => {
   return (
     <div className={'main-container'}>
       <div className={'flex-container'}>
-      <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
-        <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'}>
-        {rgbaValue.alpha < 0.5 && (
-          <div className={'text-behind-cards'}>
-          Sometimes, remaining Invisible is all you need, right ?
+        <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
+          <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'} style={!isToggled ? {background: shades[13]} : {background: hoveredShade}}>
+            {rgbaValue.alpha < 0.5 && (
+              <div className={'text-behind-cards'}>
+                Sometimes, remaining Invisible is all you need, right ?
+              </div>)}
+              {shades.map((shade, index) => (
+                <div
+                  key={index}
+                  className={!isToggled ? 'color-card-cards' : 'color-card-stripes'}
+                  style={{ backgroundColor: shade, borderColor: shade }}
+                  onMouseEnter={() => handleCardHover(shade)}
+                  onMouseLeave={() => handleCardHover('Hover over a shade to see the color')}
+                  onMouseDown={() => handleCardDown(shade)}/>
+              ))}
+          </div>
         </div>
-        )}
-            
-            
-            {shades.map((shade, index) => (
-              <div
-                key={index}
-                className={!isToggled ? 'color-card-cards' : 'color-card-stripes'}
-                style={{ backgroundColor: shade, borderColor: shade }}
-                onMouseEnter={() => handleCardHover(shade)}
-                onMouseLeave={() => handleCardHover('Hover over a shade to see the color')}
-                onMouseDown={() => handleCardDown(shade)}
-              />
-            ))}
-        </div>
-      </div>
         <div className={'right-container'}>
           <div>
-          <div className={'text'}>Choose the type of Pallette</div>
-            <br/>
-            <ToggleButton onToggle={handleToggle} />
-            <br/>
-            <br/>
-            <div className={'text'}>Pick a color to create a palette of shades</div>
-            <br/>
+            <div className={'text'}>
+              Choose the type of Pallette
+            </div> <br/>
+            <ToggleButton onToggle={handleToggle} /> <br/> <br/>
+            <div className={'text'}>
+              Pick a color to create a palette of shades
+            </div> <br/>
             <div>
               <Picker setHsvaValue={setHsvaValue} setRgbaValue={setRgbaValue} />
-            </div>
-            <br/>
-            <div className={'text'}> Current Shade: 
-            <br/>
-              <span>{hoveredShade}</span>
-            </div>
-            <br/>
-            <div className={'text'}> Selected Shade: 
-            <br/>
+            </div> <br/>
+            <div className={'text'}>
+              Current Shade: <br/>
+              <span>
+                {hoveredShade}
+              </span>
+            </div> <br/>
+            <div className={'text'}>
+              Selected Shade: <br/>
               <CopyButton textToCopy={selectedShade} />
-              <span> </span>
-              <span>{selectedShade}</span>
+              <span className='space span'></span>
+              <span>
+                {selectedShade}
+              </span>
             </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
   );
 }  
 

@@ -1,0 +1,26 @@
+/* ToggleButton.css */
+
+button {
+    background-color: rgba(0, 78, 106, 1);
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Some padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it an inline block */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Add some margin */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 4px; /* Optional: Add rounded corners */
+  }
+  
+  /* Add style for the toggled state */
+  .toggled {
+    background-color: rgba(0, 120, 170, 1); /* Red background when toggled */
+  }
+  
+  /* Add style for the not-toggled state */
+  .not-toggled {
+    background-color: rgba(0, 120, 170, 1); /* Green background when not toggled */
+  }
+  

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Picker from '../components/Picker';
 import './Shades25.css'
 import CopyButton from '../components/CopyButton';
+import ToggleButton from '../components/ToggleButton';
 
 const Shades25 = () => {
   const [hsvaValue, setHsvaValue] = useState({hue: 0, saturation: 0, value: 0, alpha: 1})
@@ -9,6 +10,7 @@ const Shades25 = () => {
   const [hoveredShade, setHoveredShade] = useState('Hover over a shade to see the color');
   const [selectedShade, setSelectedShade] = useState('Click on a shade to see the color');
   const [shades, setShades] = useState([]);
+  const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
     const newHsvaText = `hsva(${hsvaValue.hue}, ${hsvaValue.saturation}%, ${hsvaValue.value}%, ${hsvaValue.alpha})`;
@@ -41,25 +43,41 @@ const Shades25 = () => {
     setSelectedShade(shade);
   };
   
+  const handleToggle = (value) => {
+    setIsToggled(value);
+  };
+
   return (
     <div className={'main-container'}>
       <div className={'flex-container'}>
-        <div className={'left-container'}>
-            <div className="shades-container">
-              {shades.map((shade, index) => (
-                <div
-                  key={index}
-                  className="color-card"
-                  style={{ backgroundColor: shade, gridColumn: `span 1`, gridRow: `span 1`, 
-                  borderColor: shade }}
-                  onMouseEnter={() => handleCardHover(shade)}
-                  onMouseLeave={() => handleCardHover('Hover over a shade to see the color')}
-                  onMouseDown={() => handleCardDown(shade)}
-                /> ))}
-            </div>
+      <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
+        <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'}>
+        {rgbaValue.alpha < 0.5 && (
+          <div className={'text-behind-cards'}>
+          Sometimes, remaining Invisible is all you need, right ?
         </div>
+        )}
+            
+            
+            {shades.map((shade, index) => (
+              <div
+                key={index}
+                className={!isToggled ? 'color-card-cards' : 'color-card-stripes'}
+                style={{ backgroundColor: shade, borderColor: shade }}
+                onMouseEnter={() => handleCardHover(shade)}
+                onMouseLeave={() => handleCardHover('Hover over a shade to see the color')}
+                onMouseDown={() => handleCardDown(shade)}
+              />
+            ))}
+        </div>
+      </div>
         <div className={'right-container'}>
           <div>
+          <div className={'text'}>Choose the type of Pallette</div>
+            <br/>
+            <ToggleButton onToggle={handleToggle} />
+            <br/>
+            <br/>
             <div className={'text'}>Pick a color to create a palette of shades</div>
             <br/>
             <div>

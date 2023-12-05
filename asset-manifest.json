@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/color-shards/static/css/main.1ec659d4.css",
+    "main.js": "/color-shards/static/js/main.16945212.js",
+    "index.html": "/color-shards/index.html",
+    "main.1ec659d4.css.map": "/color-shards/static/css/main.1ec659d4.css.map",
+    "main.16945212.js.map": "/color-shards/static/js/main.16945212.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ec659d4.css",
+    "static/js/main.16945212.js"
+  ]
+}

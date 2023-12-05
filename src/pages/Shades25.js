@@ -59,7 +59,7 @@ const Shades25 = () => {
     }
     else
     {
-      navigator.clipboard.writeText("'you forgot to slect the color !!'");
+      navigator.clipboard.writeText("'you forgot to select the color !!'");
     }
   
     // Simulate a delay before growing back to normal size
@@ -78,7 +78,9 @@ const Shades25 = () => {
       <div className={`left-container ${isToggled ? 'flip' : ''}`}>
         
         <div className={!isToggled ? 'left-container-cards' : 'left-container-stripes'}>
-          <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'} style={!isToggled ? {background: shades[13]} : {background: hoveredShade}}>
+          <div className={!isToggled ? 'shades-container-cards' : 'shades-container-stripes'} 
+          // style={!isToggled ? {background: shades[13]} : {background: hoveredShade}}
+          >
             
               {shades.map((shade, index) => (
                 <div
@@ -96,40 +98,43 @@ const Shades25 = () => {
           <div>
             <div className={'text'}>
               Choose the type of Pallette
-            </div> <br/>
-            <ToggleButton onToggle={handleToggle} /> <br/> <br/>
+            </div> <div className='br'></div>
+            <ToggleButton onToggle={handleToggle} /> <div className='br'></div>
             <div className={'text'}>
               Pick a color to create a palette of shades
-            </div> <br/>
+            </div> <div className='br'></div>
             <div>
               <Picker setHsvaValue={setHsvaValue} setRgbaValue={setRgbaValue} />
-            </div> <br/>
+            </div> <div className='br'></div>
             <div>
               <div className={'text'}>
-                Current Shade: <br/>
-                <span>
-                  {hoveredShade}
-                </span>
+                {window.innerWidth <= 1000 ? null : (
+                  <>
+                    Current Shade: <br />
+                    <span>
+                      {hoveredShade}
+                    </span>
+                  </>
+                )}
               </div>
-              <br />
+              <div className='br'></div>
               <div className={'text'}>
-                Selected Shade: <br />
+                Selected Shade:
                 <div className='copy-info'>
                   Click below to copy the color
                 </div>
                 <span
                   className={`space span ${isSmall ? 'text small' : ''}`}
-                  onClick={handleClick} >
+                  onClick={window.innerWidth <= 1000 ? null : handleClick} >
                   {selectedShade}
                 </span>
               </div>
             </div>
-            <br/>
+            <div className='br'></div>
             <div className='compare-box'>
               <div className='hovered-color' style={{ background: hoveredShade === 'Hover over a shade to see the color' ? 'white' : hoveredShade }}></div>
               <div className='selected-color' style={{background: selectedShade}}></div>
             </div>
-            
           </div>
         </div>
       </div>
